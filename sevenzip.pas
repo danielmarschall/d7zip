@@ -16,6 +16,10 @@
 // Original code at https://code.google.com/archive/p/d7zip/
 // Uploaded to GitHub at https://github.com/danielmarschall/d7zip
 
+// Current version by Daniel Marschall, 15 Feb 2025 with the following changes:
+// - Marked unit as "platform"
+// - Used units are now fully qualified names
+
 // Current version by Daniel Marschall, 15 May 2024 with the following changes:
 // - Added format GUID: RAR5; https://github.com/geoffsmith82/d7zip/issues/7
 // - Fix Range Check Exception in RINOK(); https://github.com/geoffsmith82/d7zip/pull/8
@@ -42,14 +46,16 @@
 //                          But this is complex, because we have things like FFileTime, TPropVariant, etc.!
 
 
-unit sevenzip;
+unit sevenzip platform;
 {$ALIGN ON}
 {$MINENUMSIZE 4}
 {$WARN SYMBOL_PLATFORM OFF}
 
 interface
 
-uses SysUtils, Windows, ActiveX, Classes, Contnrs, IOUtils, Math;
+uses
+  System.SysUtils, Winapi.Windows, Winapi.ActiveX, System.Classes, System.Contnrs,
+  System.IOUtils, System.Math;
 
 type
   PInt32 = ^Int32;
@@ -79,8 +85,8 @@ const
   kpidSize                  = 7;  // VT_UI8
   kpidPackSize              = 8;  // VT_UI8
   kpidAttributes            = 9;  // VT_UI4
-  kpidCreationTime     = 10; // VT_FILETIME
-  kpidLastAccessTime   = 11; // VT_FILETIME
+  kpidCreationTime          = 10; // VT_FILETIME
+  kpidLastAccessTime        = 11; // VT_FILETIME
   kpidLastWriteTime         = 12; // VT_FILETIME
   kpidSolid                 = 13; // VT_BOOL
   kpidCommented             = 14; // VT_BOOL
